@@ -2,8 +2,12 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 func main() {
-	fmt.Println("Hello world")
+	input := []string{"1", "ATA"}
+	var result = constructTrie(input)
+	resultAsString := strings.Join(result, "\n")
+	fmt.Println("", resultAsString)
 }

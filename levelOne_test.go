@@ -2,6 +2,7 @@ package main
 
 import (
 	"reflect"
+	"slices"
 	"testing"
 )
 
@@ -15,9 +16,15 @@ func TestConstructTrie(t *testing.T) {
 		input := inputs[index]
 		output := outputs[index]
 		var result = constructTrie(input)
+
+		// Sorting resolve issue in the first test
+		// Ref: https://gobyexample.com/sorting
+		slices.Sort(result)
+		slices.Sort(output)
+
 		//if result != output {
 		if !reflect.DeepEqual(result, output) {
-			t.Errorf(`constructTrie() = %q, %v`, result, output)
+			t.Errorf(`constructTrie() = %q %v`, result, output)
 		}
 	}
 }

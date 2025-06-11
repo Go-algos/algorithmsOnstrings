@@ -17,14 +17,14 @@ func constructTrie(input []string) []string {
 	}
 
 	root := 0
-	trie := []string{strconv.Itoa(root)}
+	trie := []string{strconv.Itoa(root) + "->" + strconv.Itoa(root+1) + ":" + input[1][0:1]}
 
 	// Main loop to iterate over patterns
 	for index := 0; index < numberOfPatterns; index++ {
 		// TODO: how to assign root??
 		currentNode := root
 		pattern := input[index+1]
-		currentEdge := strings.TrimSpace(pattern[root : root+1]) // take first edge from the pattern
+		currentEdge := strings.TrimSpace(pattern[currentNode : currentNode+1]) // take first edge from the pattern
 		for i := 0; i < len(pattern); i++ {
 			currentSymb := string(pattern[i])
 
@@ -34,7 +34,8 @@ func constructTrie(input []string) []string {
 				a := strconv.Itoa(currentNode)
 				b := strconv.Itoa(currentNode + 1)
 				trieItem := a + "->" + b + ":" + currentSymb
-				currentNode = i
+				currentEdge = strings.TrimSpace(pattern[currentNode : currentNode+1])
+				currentNode += 1
 				trie = append(trie, trieItem)
 			}
 		}

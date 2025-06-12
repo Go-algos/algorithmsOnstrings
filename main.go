@@ -5,15 +5,11 @@ import (
 )
 
 func main() {
-	input := []string{"3", "AT", "AG", "AC"}
+	input := []string{"1", "ATA"}
 	var result = constructTrie(input)
 	//resultAsString := strings.Join(result, "\n")
 	/*
-		Expected:
-		0->1:A
-		1->4:C
-		1->3:G
-		1->2:T
+		{"0->1:A", "2->3:A", "1->2:T"}
 	*/
 	fmt.Println("", result)
 }

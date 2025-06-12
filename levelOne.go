@@ -1,48 +1,51 @@
 package main
 
 import (
-	"fmt"
 	"strconv"
-	"strings"
 )
+
+// Ref: how to define struct
+type edge struct {
+	nodeFrom int
+	label    string
+}
 
 // Problem: Construct a Trie from a Collection of Patterns
 func constructTrie(input []string) []string {
-	// temp output
-
-	numberOfPatterns, err := strconv.Atoi(input[0])
-	if err != nil {
-		fmt.Println("Failed to extract number of patterns from input")
-		panic(err)
-	}
-
+	numberOfPatterns, _ := strconv.Atoi(input[0])
 	root := 0
 	trie := []string{strconv.Itoa(root) + "->" + strconv.Itoa(root+1) + ":" + input[1][0:1]}
-	totalNodes := 1
+	outgoingEdges := make(map[edge]int)
+	outgoingEdges[edge{nodeFrom: 0, label: input[1][0:1]}] = root + 1 // nodeTo always predefined
 
-	// Main loop to iterate over patterns
+	// Ref: How to work with maps in Go => https://gobyexample.com/maps
+	// We are going to store edge to node index relationship
+
+	// Main loop => to iterate over patterns
 	for index := 0; index < numberOfPatterns; index++ {
 		currentNode := root
 		pattern := input[index+1]
 
-		currentEdge := pattern[currentNode : currentNode+1] // take first edge from the pattern
-
 		for i := 0; i < len(pattern); i++ {
-			currentSymb := string(pattern[i])
+			currentSymbol := string(pattern[i])
 
-			if strings.HasSuffix(currentEdge, currentSymb) {
-				currentNode += 1
+			// there is an outgoing edge from this node with the given symbol
+			nodeTo, exists := outgoingEdges[edge{nodeFrom: currentNode, label: currentSymbol}]
+			if exists {
+				currentNode = nodeTo
+
+				//}
 			} else {
-				a := strconv.Itoa(currentNode)
-				b := strconv.Itoa(totalNodes + 1)
-				trieItem := a + "->" + b + ":" + currentSymb
-				currentEdge = strings.TrimSpace(pattern[i : i+1])
-				totalNodes += 1
-				currentNode = totalNodes
+
+				newEdge := edge{nodeFrom: currentNode, label: currentSymbol}
+				outgoingEdges[newEdge] = len(outgoingEdges) + 1
+				// newNode added
+
+				trieItem := strconv.Itoa(currentNode) + "->" + strconv.Itoa(len(outgoingEdges)) + ":" + currentSymbol
 				trie = append(trie, trieItem)
+				currentNode = outgoingEdges[newEdge]
 			}
 		}
 	}
-
 	return trie
 }

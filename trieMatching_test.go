@@ -33,8 +33,8 @@ func TestTrieMatching(t *testing.T) {
 		slices.Sort(expected)
 
 		if !reflect.DeepEqual(actual, expected) {
-			t.Errorf(`Test %q structTrie() = %q`, index, actual)
-			t.Errorf(`Test %q constructTrie() = %q`, index, expected)
+			t.Errorf(`Test %q trieMatching:actual = %q`, index, actual)
+			t.Errorf(`Test %q trieMatching:expected = %q`, index, expected)
 		}
 	}
 

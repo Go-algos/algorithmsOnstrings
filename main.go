@@ -5,6 +5,12 @@ import (
 )
 
 func main() {
-	result := trieMatching("AAA", "AA")
+	/*
+		"AATCGGGTTCAATCGGGGT",
+					"2",
+					"ATCG",
+					"GGGT"}
+	*/
+	result := trieMatching("AATCGGGTTCAATCGGGGT", "GGGT")
 	fmt.Println("", result)
 }

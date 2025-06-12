@@ -14,10 +14,16 @@ func TestTrieMatching(t *testing.T) {
 		{
 			"AA",
 			"1",
-			"T"}}
+			"T"},
+		{
+			"AATCGGGTTCAATCGGGGT",
+			"2",
+			"ATCG",
+			"GGGT"}}
 	var exptedOutput [][]int = [][]int{
 		{0, 1},
-		{}}
+		{},
+		{1, 4, 11, 15}}
 
 	for index := 0; index < len(inputs); index++ {
 		input := inputs[index]

@@ -1,5 +1,5 @@
 Intention:
-** Learn Go programming by applying implementing string algorithms
+** Learn Go programming by implementing string algorithms
 
 References:
 https://www.coursera.org/learn/algorithms-on-strings/

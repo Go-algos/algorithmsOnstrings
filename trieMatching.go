@@ -5,7 +5,7 @@ import "strings"
 func prefixMatching(text string, trie string) bool {
 	//symbol := text[0:1]
 	v := 0 // root of the trie
-	leafDetector := trie[len(trie)-2 : 1]
+	leafDetector := trie[len(trie)-1 : 1]
 	for i := 0; i < len(text); i++ {
 		triePart := trie[v : v+1]
 		if triePart == leafDetector { // we detected leaf + there are prev matches

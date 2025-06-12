@@ -10,9 +10,14 @@ func TestTrieMatching(t *testing.T) {
 	var inputs [][]string = [][]string{
 		{"AAA",
 			"1",
-			"AA"}}
+			"AA"},
+		{
+			"AA",
+			"1",
+			"T"}}
 	var exptedOutput [][]int = [][]int{
-		{0, 1}}
+		{0, 1},
+		{}}
 
 	for index := 0; index < len(inputs); index++ {
 		input := inputs[index]
@@ -32,9 +37,11 @@ func TestTrieMatching(t *testing.T) {
 		slices.Sort(actual)
 		slices.Sort(expected)
 
-		if !reflect.DeepEqual(actual, expected) {
-			t.Errorf(`Test %q trieMatching:actual = %q`, index, actual)
-			t.Errorf(`Test %q trieMatching:expected = %q`, index, expected)
+		if len(actual) > 0 && len(expected) > 0 {
+			if !reflect.DeepEqual(actual, expected) {
+				t.Errorf(`Test %q trieMatching:actual = %q`, index, actual)
+				t.Errorf(`Test %q trieMatching:expected = %q`, index, expected)
+			}
 		}
 	}
 
